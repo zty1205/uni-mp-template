@@ -9,6 +9,7 @@
 
 <script>
 import { isDef } from '@/utils/util';
+import HOST from '@/constant';
 console.log('isDef = ', isDef);
 export default {
   data() {
