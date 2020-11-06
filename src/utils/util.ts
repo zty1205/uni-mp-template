@@ -1,3 +1,5 @@
+// 业务无关的 纯js方法
+
 export function isDef(val: unknown): boolean {
   return val !== null && val !== undefined && val !== '';
 }
