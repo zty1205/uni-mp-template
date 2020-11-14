@@ -19,7 +19,6 @@ function buildSubPackageCopyPlugin(subPackages) {
       toType: 'dir'
     });
   }, []);
-  console.log('patterns = ', patterns);
   return new CopyWebpackPlugin(patterns);
 }
 

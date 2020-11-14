@@ -9,8 +9,11 @@
 
 <script>
 import { isDef } from '@/utils/util';
-import HOST from '@/constant';
+import { getAPIRoot } from '@/utils/common';
+import host from '@/constant/http';
 console.log('isDef = ', isDef);
+console.log('HOST = ', host);
+console.log('getAPIRoot = ', getAPIRoot());
 export default {
   data() {
     return {
