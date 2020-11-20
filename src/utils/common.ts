@@ -4,12 +4,16 @@ export function getEnv(): VUE_APP_ENV {
   return process.env.VUE_APP_ENV;
 }
 
-export function getAppId(): string {
-  return process.env.VUE_APP_MP_APPID;
+export function isProd() {
+  return getEnv() === 'production';
 }
 
-export function isDevTools(): boolean {
-  return uni.getSystemInfoSync().platform === 'devtools';
+export function isDev() {
+  return getEnv() === 'development';
+}
+
+export function getAppId(): string {
+  return process.env.VUE_APP_MP_APPID;
 }
 
 /**
