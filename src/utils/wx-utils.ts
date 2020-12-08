@@ -143,3 +143,42 @@ export function authByWxApi(scope: WX_AUTHORIZE_SCOPE, content: string): Promise
     });
   });
 }
+
+enum GetLocationErrorType {
+  SYSTEM_FAIL,
+  REJECT
+}
+interface getLocationErrorRes {
+  type: GetLocationErrorType;
+  errMsg: string;
+  origin: unknown;
+}
+
+export function getLocation(): Promise<UniApp.GetLocationSuccess> {
+  return new Promise((resolve, reject) => {
+    uni.authorize({
+      scope: 'scope.userLocation',
+      success: () => {
+        uni.getLocation({
+          success: (res: UniApp.GetLocationSuccess) => {
+            resolve(res);
+          },
+          fail: (e) => {
+            reject({
+              type: GetLocationErrorType.REJECT,
+              errMsg: 'auth reject',
+              origin: e
+            });
+          }
+        });
+      },
+      fail: (e) => {
+        reject({
+          type: GetLocationErrorType.SYSTEM_FAIL,
+          errMsg: 'system fail',
+          origin: e
+        });
+      }
+    });
+  });
+}

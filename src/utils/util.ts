@@ -8,6 +8,12 @@ export function isUndef(val: unknown): boolean {
   return val === null || val === undefined || val === '';
 }
 
+const _toString = Object.prototype.toString;
+
+export function toRawType(value: unknown) {
+  return _toString.call(value).slice(8, -1);
+}
+
 export function debounce(fn: Function, wait: number = 300, immediate: boolean = false): Function {
   let timer: any = null;
   return function() {

@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import toat, { showLoading, showToast } from '../../utils/toast';
 export default {
   data() {
     return {
@@ -15,7 +16,12 @@ export default {
     };
   },
   onLoad() {},
-  methods: {}
+  methods: {},
+  mounted() {
+    console.log('toat = ', toat);
+    showLoading({ title: 'loading' });
+    showToast({ title: 'toast' });
+  }
 };
 </script>
 
