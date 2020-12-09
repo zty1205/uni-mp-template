@@ -9,7 +9,7 @@ interface wxLogConfig {
   url: string;
   userId?: undefined | string | number;
   token?: undefined | string;
-  defaultCustom?: undefined | plainObject;
+  defaultCustom?: undefined | AnyObject;
 }
 
 class WxLog {
@@ -19,7 +19,7 @@ class WxLog {
   private url: string;
   public userId: undefined | string | number;
   public token: undefined | string;
-  public defaultCustom: undefined | plainObject;
+  public defaultCustom: undefined | AnyObject;
   constructor(config: wxLogConfig) {
     this.trackKey = config.trackKey;
     this.url = config.url;
@@ -28,7 +28,7 @@ class WxLog {
     this.defaultCustom = config.defaultCustom;
   }
 
-  log(trackId: string, custom?: plainObject, beforeHandle?: Function): void {
+  log(trackId: string, custom?: AnyObject, beforeHandle?: Function): void {
     console.log('log');
     try {
       uni.request({

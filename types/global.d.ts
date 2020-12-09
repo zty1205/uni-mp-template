@@ -31,8 +31,3 @@ declare enum WX_AUTHORIZE_SCOPE {
   WRITE_PHOTOS_ALBUM = 'scope.writePhotosAlbum', //保存到相册
   CAMERA = 'scope.camera' //组件	摄像头
 }
-
-// interface
-declare interface plainObject {
-  [propName: string]: any;
-}

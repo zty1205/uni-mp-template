@@ -151,11 +151,26 @@ enum GetLocationErrorType {
 interface getLocationErrorRes {
   type: GetLocationErrorType;
   errMsg: string;
-  origin: unknown;
+  origin?: any;
 }
 
 export function getLocation(): Promise<UniApp.GetLocationSuccess> {
   return new Promise((resolve, reject) => {
+    const { locationEnabled, locationAuthorized } = uni.getSystemInfoSync();
+    if (!locationEnabled) {
+      reject({
+        type: GetLocationErrorType.SYSTEM_FAIL,
+        errMsg: '请到系统设置打开地理位置的系统开关'
+      });
+      return;
+    }
+    if (!locationAuthorized) {
+      reject({
+        type: GetLocationErrorType.SYSTEM_FAIL,
+        errMsg: '请到设置页面打开允许微信使用定位的开关'
+      });
+      return;
+    }
     uni.authorize({
       scope: 'scope.userLocation',
       success: () => {
@@ -166,7 +181,7 @@ export function getLocation(): Promise<UniApp.GetLocationSuccess> {
           fail: (e) => {
             reject({
               type: GetLocationErrorType.REJECT,
-              errMsg: 'auth reject',
+              errMsg: '请允许授权微信使用您的地理位置',
               origin: e
             });
           }
@@ -175,7 +190,7 @@ export function getLocation(): Promise<UniApp.GetLocationSuccess> {
       fail: (e) => {
         reject({
           type: GetLocationErrorType.SYSTEM_FAIL,
-          errMsg: 'system fail',
+          errMsg: '请确认是否打开了系统/微信的地理位置开关',
           origin: e
         });
       }

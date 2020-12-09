@@ -9,6 +9,7 @@
 
 <script>
 import toat, { showLoading, showToast } from '../../utils/toast';
+import request from '../../api/request';
 export default {
   data() {
     return {
@@ -18,9 +19,17 @@ export default {
   onLoad() {},
   methods: {},
   mounted() {
-    console.log('toat = ', toat);
-    showLoading({ title: 'loading' });
-    showToast({ title: 'toast' });
+    // console.log('toat = ', toat);
+    // showLoading({ title: 'loading' });
+    // showToast({ title: 'toast' });
+    request({
+      url: '/api/drugstore/1.0/get_default_store_info_v2',
+      method: 'GET',
+      params: { version: 2 },
+      data: { v: 1 }
+    }).then((res) => {
+      console.log('res = ', res);
+    });
   }
 };
 </script>

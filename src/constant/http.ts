@@ -7,7 +7,7 @@ type HOST = {
 };
 
 const UUID: string = 'uuid-uuid-uuid';
-const request: string = 'request';
+const request: string = 'request'; //
 const LOG: string = 'log';
 
 const CDN = {
