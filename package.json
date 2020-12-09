@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "npm run dev:h5",
+    "commit": "git-cz",
+    "changelog": "conventional-changelog -p conventional -i CHANGELOG.md -s -r 0",
     "build": "cross-env NODE_ENV=production UNI_PLATFORM=mp-weixin vue-cli-service uni-build",
     "dev": "cross-env NODE_ENV=development UNI_PLATFORM=mp-weixin vue-cli-service uni-build --watch",
     "test": "cross-env UNI_PLATFORM=mp-weixin jest -i"
@@ -30,6 +32,8 @@
     "vuex": "^3.2.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "@dcloudio/types": "*",
     "@dcloudio/uni-automator": "^2.0.0-29320201014001",
     "@dcloudio/uni-cli-shared": "^2.0.0-29320201014001",
@@ -45,9 +49,15 @@
     "@vue/cli-service": "~4.5.0",
     "babel-plugin-import": "^1.11.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
+    "commitizen": "^4.2.2",
+    "conventional-changelog": "^3.1.24",
+    "conventional-changelog-cli": "^2.1.1",
     "copy-webpack-plugin": "5.0.0",
     "cross-env": "^7.0.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^4.3.5",
     "jest": "^25.4.0",
+    "lint-staged": "^10.5.3",
     "mini-types": "*",
     "miniprogram-api-typings": "*",
     "postcss-comment": "^2.0.0",
@@ -58,6 +68,29 @@
     "Android >= 4",
     "ios >= 8"
   ],
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{vue,js,jsx,scss,css,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "uni-app": {
     "scripts": {}
   }
