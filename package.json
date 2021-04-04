@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "npm run dev:h5",
+    "serve": "npm run dev",
     "commit": "git-cz",
     "changelog": "conventional-changelog -p conventional -i CHANGELOG.md -s -r 0",
     "build": "cross-env NODE_ENV=production UNI_PLATFORM=mp-weixin vue-cli-service uni-build",
